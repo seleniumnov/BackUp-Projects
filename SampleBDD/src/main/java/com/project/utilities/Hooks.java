@@ -1,23 +1,19 @@
-package pageObjects;
+package com.project.utilities;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.chrome.ChromeDriverService;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import utilities.Base;
-import utilities.TestDemo;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Hooks extends Base {
 
@@ -29,7 +25,7 @@ public class Hooks extends Base {
 	public static List<String> scstatus = new ArrayList<String>();
 	public static List<String> featureName = new ArrayList<String>();
 	
-	public static int tagsCount = TestDemo.getCountOfTags();
+	//public static int tagsCount = TestDemo.getCountOfTags();
 
 	public static BufferedWriter bw1;
 
@@ -44,7 +40,7 @@ public class Hooks extends Base {
 				}
 			}
 		} catch (Exception e) {
-
+			e.getMessage();
 		}
 	}
 	
@@ -56,29 +52,23 @@ public class Hooks extends Base {
 	@Before(order = 1)
 	public void setup1() {
 
-		String path = "C:\\Users\\suresh.kurry\\Downloads\\chromedriver_win32\\chromedriver.exe";
+		//String path = "C:\\Users\\suresh.kurry\\Downloads\\chromedriver_win32\\chromedriver.exe";
 		index++;
-		System.setProperty("webdriver.chrome.driver", 
-				"C:\\Users\\suresh.kurry\\Downloads\\chromedriver_win32\\chromedriver.exe");
-		ChromeDriverService service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File(path))
-				.usingAnyFreePort()
-				//.usingPort(gen())
-				//.withEnvironment(ImmutableMap.of("DISPLAY", ":15"))
-				.withSilent(false)
-				.build();
+		WebDriverManager.chromedriver().setup();
+		/*
+		 * ChromeDriverService service = new ChromeDriverService.Builder()
+		 * .usingDriverExecutable(new File(path)) .usingAnyFreePort()
+		 * //.usingPort(gen()) //.withEnvironment(ImmutableMap.of("DISPLAY", ":15"))
+		 * .withSilent(false) .build();
+		 * 
+		 * 
+		 * try { service.start(); } catch (IOException e) {
+		 * 
+		 * e.printStackTrace(); }
+		 */		
+		//ChromeOptions option = new ChromeOptions();
 		
-		
-		try {
-			service.start();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}		
-		ChromeOptions option = new ChromeOptions();
-		
-		driver = new RemoteWebDriver(service.getUrl(), option);
-		
+		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 
 	}
@@ -105,10 +95,10 @@ public class Hooks extends Base {
 	@After(order = 0)
 	public void AfterSteps(Scenario scenario) throws Exception {
 		System.out.println("Close Webdriver instance");
-		driver.quit();
-		Base.getInstance().removeDriver();
+		driver.close();
+		//Base.getInstance().removeDriver();
 
-		if (index == tagsCount) {
+		if (index == 3) {
 
 			File file = new File(reportPath);
 
@@ -159,7 +149,7 @@ public class Hooks extends Base {
 			bw1.write("<tr>" + "\n");
 			
 			
-			for (int i = 0; i < tagsCount; i++) {
+			for (int i = 0; i < 3; i++) {
 
 				updateResult(featureName.get(i), i, scname.get(i), scstatus.get(i));
 			}

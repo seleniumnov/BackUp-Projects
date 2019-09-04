@@ -1,4 +1,4 @@
-package stepDefinitions;
+package com.project.stepDefinitions;
 
 import java.sql.Timestamp;
 

@@ -10,7 +10,7 @@ Feature: HTML Report
   Scenario: Verify if search yields the expected products list
     Then Test Scenarios Four
 
-  @Smoke
+  @Smoke1
   Scenario: Verify if search yields the expected products list- Anonymous
     Then Test Scenarios Four
 

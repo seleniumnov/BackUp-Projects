@@ -1,10 +1,12 @@
-package stepDefinitions;
+package com.project.stepDefinitions;
 
 import org.junit.Assert;
 
+import com.project.utilities.Base;
+
 import cucumber.api.java.en.Given;
 
-public class TestCases {
+public class TestCases extends Base {
 	
 	
 	@Given("^Test Scenarios One$")
@@ -28,6 +30,7 @@ public class TestCases {
 	@Given("^Test Scenarios Four$")
 	public void test_Scenarios_Four() {
 	    
+		Base.driver.get("https://www.google.co.in");
 	    Assert.assertEquals("Suresh", "Sure");
 	}
 

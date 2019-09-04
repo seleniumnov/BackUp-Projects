@@ -1,14 +1,9 @@
 Feature: Login Functionality
-  
+
   Background: 
-  	Given  I Navigate to Application
+    Given I Navigate to Application
 
-  @Smoke
-  Scenario Outline: Verify User Credentials
-    Given I Entered UserName "<rowNum>"
-    When I Entered Password  "<rowNum>"
-
-    Examples: 
-      | rowNum |
-      |      1 |
-     
+  @Hello
+  Scenario: Login
+    When I Entered UserName
+    Then I Entered Password

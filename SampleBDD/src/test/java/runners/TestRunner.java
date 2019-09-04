@@ -16,12 +16,16 @@ import cucumber.api.junit.Cucumber;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = { "src/test/resources/FeatureFiles" }, 
-		glue = { "stepDefinitions","pageObjects" }, 
-		plugin = {
-				"rerun:target/failed.txt" }, 
-		monochrome = true, 
-		tags = { "@Smoke"},
-		strict = true
+		glue = { "com.project.stepDefinitions","com.project.utilities"}, 
+		plugin = { 
+				"pretty", 
+				"html:target/cucumber-html-report",
+				"json:target/cucumber.json",
+				"rerun:target/FailedScenarios/failed.txt" 
+				}, 
+		monochrome = true,
+		tags = {"@Hello"}
+		
 
 )
 
