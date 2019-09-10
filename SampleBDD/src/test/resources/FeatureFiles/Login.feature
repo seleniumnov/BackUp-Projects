@@ -4,6 +4,11 @@ Feature: Login Functionality
     Given I Navigate to Application
 
   @Hello
-  Scenario: Login
-    When I Entered UserName
-    Then I Entered Password
+  Scenario Outline: Login
+    When I Entered UserName "<rownum>"
+    Then I Entered Password "<rownum>"
+    
+    Examples:
+    |rownum|
+    |1|
+    |2|

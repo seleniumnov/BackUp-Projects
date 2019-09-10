@@ -29,7 +29,7 @@ public class HMSLogin extends Base {
 		System.out.println(testData.get(num).get("UserName"));
 	}
 
-	@When("^I Entered Password  \"([^\"]*)\"$")
+	@When("^I Entered Password \"([^\"]*)\"$")
 	public void i_Entered_Password(String arg1) throws Throwable {
 		
 		int num = Integer.parseInt(arg1)-1;
